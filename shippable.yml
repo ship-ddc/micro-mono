@@ -17,7 +17,8 @@ build:
     options: '--privileged=true'
 
   ci:
-    - ./build_push.sh
+    - ./build.sh
+    - ./tag_image.sh
 
 integrations:
   hub:
