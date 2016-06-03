@@ -32,22 +32,21 @@ detect_changed_folders() {
   fi
 }
 
-build_and_push_changed_components() {
+tag_and_push_changed_components() {
   for component in $changed_components
   do
     if [ "$component" != '_global' ] && [ "$component" != 'node_modules' ]; then
-      build_and_push_image $component
+      tag_and_push_image $component
     fi
   done
 }
 
-build_and_push_image() {
+tag_and_push_image() {
   if [[ -z "$1" ]]; then
     return 0
   else
-    echo "building image $1"
-    sudo docker build -t $IMAGE_NAME:$1.$BRANCH.$SHIPPABLE_BUILD_NUMBER
-    $IMAGE_NAME:$1.$BRANCH.$SHIPPABLE_BUILD_NUMBER
+    echo "tagging image $1"
+    sudo docker tag -f $IMAGE_NAME:$BRANCH.$SHIPPABLE_BUILD_NUMBER $IMAGE_NAME:$1.$BRANCH.$SHIPPABLE_BUILD_NUMBER
     echo "pushing image $1"
     sudo docker push $IMAGE_NAME:$1.$BRANCH.$SHIPPABLE_BUILD_NUMBER
   fi
@@ -55,7 +54,7 @@ build_and_push_image() {
 
 if [ "$IS_PULL_REQUEST" != true ]; then
   detect_changed_languages
-  build_and_push_changed_components
+  tag_and_push_changed_components
 else
   echo "skipping because it's a PR"
 fi

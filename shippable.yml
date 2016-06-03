@@ -1,0 +1,28 @@
+# Language setting
+language: node_js
+
+# Version number
+node_js:
+  - 4.3
+
+build:
+  pre_ci:
+    - mkdir -p ./shippable/testresults
+    - mkdir -p ./shippable/codecoverage
+
+  pre_ci_boot:
+    image_name: drydock/u14nod
+    image_tag: prod
+    pull: true
+    options: '--privileged=true'
+
+  ci:
+    - ./build_push.sh
+
+integrations:
+  hub:
+    - integrationName: "Docker Hub"
+      type: docker
+      branches:
+        only:
+          - master
