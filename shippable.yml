@@ -22,11 +22,8 @@ build:
     options: '--privileged=true'
 
   ci:
+    - ./test.sh
     - ./tag_image.sh
-
-  post_ci:
-    - ./node_modules/.bin/istanbul cover grunt -- -u tdd
-    - ./node_modules/.bin/istanbul report cobertura --dir  ./shippable/codecoverage/
 
 integrations:
   hub:
