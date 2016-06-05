@@ -4,14 +4,12 @@ detect_changed_languages() {
   echo "detecting changes for this build"
   languages=`git diff --name-only $SHIPPABLE_COMMIT_RANGE | sort -u | awk 'BEGIN {FS="/"} {print $1}' | uniq`
 
-  echo $SHIPPABLE_COMMIT_RANGE
-  echo $languages
-
   for language in $languages
+  changed_components=
   do
     detect_changed_folders $language
+    tag_and_push_changed_components
   done
-  echo $changed_components
 }
 
 detect_changed_folders() {
@@ -62,8 +60,7 @@ tag_and_push_image() {
 
 if [ "$IS_PULL_REQUEST" != true ]; then
   detect_changed_languages
-  echo $changed_components
-  tag_and_push_changed_components
+  # tag_and_push_changed_components
 else
   echo "skipping because it's a PR"
 fi
