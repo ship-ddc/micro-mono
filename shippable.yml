@@ -22,7 +22,6 @@ build:
     options: '--privileged=true'
 
   ci:
-    - mkdir ./shippable/testresults && mkdir ./shippable/codecoverage
     - ./install.sh
     - ./test.sh
     - ./build_push_images.sh
