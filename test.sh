@@ -62,3 +62,10 @@ execute_code_coverage() {
     ./$language/$1/node_modules/.bin/istanbul report cobertura --root ./$language/$1 --dir  ./shippable/codecoverage/
   fi
 }
+
+if [ "$IS_PULL_REQUEST" != true ]; then
+  detect_changed_languages
+  # tag_and_push_changed_components
+else
+  echo "skipping because it's a PR"
+fi
