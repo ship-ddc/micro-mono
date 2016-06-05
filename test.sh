@@ -4,6 +4,8 @@ detect_changed_languages() {
   echo "detecting changes for this build"
   languages=`git diff --name-only $SHIPPABLE_COMMIT_RANGE | sort -u | awk 'BEGIN {FS="/"} {print $1}' | uniq`
 
+  echo $SHIPPABLE_COMMIT_RANGE
+
   for language in $languages
   do
     unset changed_components
