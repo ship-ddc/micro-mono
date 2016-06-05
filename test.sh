@@ -64,9 +64,8 @@ execute_code_coverage() {
     echo "running code coverage on $1"
     base=/root/src/github.com/ttrahan/micro-mono
     cd $base/$language/$1
-    pwd
-    ./node_modules/.bin/istanbul cover grunt --gruntfile ./$language/$1 -u tdd
-    ./node_modules/.bin/istanbul report cobertura --root ./$language/$1 --dir  ./shippable/codecoverage/
+    ./node_modules/.bin/istanbul cover grunt --force -u tdd
+    ./node_modules/.bin/istanbul report cobertura --dir  ./shippable/codecoverage/
     cd $base
   fi
 }
