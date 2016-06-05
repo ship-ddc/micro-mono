@@ -52,7 +52,7 @@ tag_and_push_image() {
     return 0
   else
     echo "building image $1"
-    sudo docker build -t $IMAGE_NAME:$1.$BRANCH.$SHIPPABLE_BUILD_NUMBER ./nod/$1
+    sudo docker build -t $IMAGE_NAME:$1.$BRANCH.$SHIPPABLE_BUILD_NUMBER ./$language/$1
     echo "pushing image $1"
     sudo docker push $IMAGE_NAME:$1.$BRANCH.$SHIPPABLE_BUILD_NUMBER
   fi
