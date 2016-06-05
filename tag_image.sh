@@ -15,10 +15,6 @@ detect_changed_languages() {
 detect_changed_folders() {
   folders=`git diff --name-only $SHIPPABLE_COMMIT_RANGE | sort -u | grep $1 | awk 'BEGIN {FS="/"} {print $2}' | uniq`
 
-  # if [ !folders ]; then
-  #   echo "no image-related changes to process"
-  # fi
-
   push_all_images=false
   for folder in $folders
   do

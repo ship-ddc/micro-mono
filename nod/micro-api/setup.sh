@@ -8,7 +8,7 @@ cd /root/micro-api
 
 # install node modules. the above mv will make this zip through as nothing new is installed
 npm config set loglevel warn
-npm install --production
+npm install
 
 # # install python and pip
 # apt-get update

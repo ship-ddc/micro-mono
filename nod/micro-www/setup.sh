@@ -8,7 +8,7 @@ cd /root/micro-www
 
 # install node modules. the above mv will make this zip through as nothing new is installed
 npm config set loglevel warn
-npm install --production
+npm install
 
 # # install awscli
 # apt-get remove python-pip

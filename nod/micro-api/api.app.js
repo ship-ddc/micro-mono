@@ -5,7 +5,7 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var winston = require('winston');
-var logging = require('../_global/logging.js');
+var global_placeholder = require('../_global/placeholder.js');
 
 
 var routes = require('./routes/routes');
@@ -30,7 +30,9 @@ app.use(
 
 logger.remove(winston.transports.Console);
 logger.add(winston.transports.Console,
-  {level: process.env.LOG_LEVEL || 'debug'});
+  {level: process.env.LOG_LEVEL || 'debug',
+  filename: 'logs/micro-api_debug.log'
+});
 
 routes(app);
 
