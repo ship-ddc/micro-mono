@@ -5,7 +5,7 @@ detect_changed_languages() {
   languages=`git diff --name-only $SHIPPABLE_COMMIT_RANGE | sort -u | awk 'BEGIN {FS="/"} {print $1}' | uniq`
 
   echo $SHIPPABLE_COMMIT_RANGE
-  echo languages
+  echo $languages
 
   for language in $languages
   do
