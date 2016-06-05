@@ -5,8 +5,8 @@ detect_changed_languages() {
   languages=`git diff --name-only $SHIPPABLE_COMMIT_RANGE | sort -u | awk 'BEGIN {FS="/"} {print $1}' | uniq`
 
   for language in $languages
-  changed_components=
   do
+    unset changed_components
     detect_changed_folders $language
     tag_and_push_changed_components
   done
