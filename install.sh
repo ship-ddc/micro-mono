@@ -10,7 +10,7 @@ detect_changed_languages() {
   do
     unset changed_components
     detect_changed_folders $language
-    run_tests
+    run_install
   done
 }
 
@@ -36,38 +36,23 @@ detect_changed_folders() {
   fi
 }
 
-run_tests() {
+run_install() {
   for component in $changed_components
   do
     if [ "$component" != '_global' ] && [ "$component" != 'node_modules' ]; then
-      execute_unit_tests $component
-      execute_code_coverage $component
+      execute_install $component
     fi
   done
 }
 
-execute_unit_tests() {
+execute_install() {
   if [[ -z "$1" ]]; then
     return 0
   else
-    echo "running unit tests on $1"
+    echo "installing dependencies for $1"
     base=/root/src/github.com/ttrahan/micro-mono
     cd $base/$language/$1
-    grunt
-  fi
-}
-
-execute_code_coverage() {
-  if [[ -z "$1" ]]; then
-    return 0
-  else
-    echo "running code coverage on $1"
-    base=/root/src/github.com/ttrahan/micro-mono
-    cd $base/$language/$1
-    pwd
-    ./node_modules/.bin/istanbul cover grunt --gruntfile ./$language/$1 -u tdd
-    ./node_modules/.bin/istanbul report cobertura --root ./$language/$1 --dir  ./shippable/codecoverage/
-    cd $base
+    npm install
   fi
 }
 

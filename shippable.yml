@@ -22,9 +22,9 @@ build:
     options: '--privileged=true'
 
   ci:
-    - npm install
+    - ./install.sh
     - ./test.sh
-    - ./tag_image.sh
+    - ./build_push_images.sh
 
 integrations:
   hub:
