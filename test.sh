@@ -53,7 +53,7 @@ execute_unit_tests() {
     echo "running unit tests on $1"
     base=/root/src/github.com/ttrahan/micro-mono
     cd $base/$language/$1
-    grunt
+    grunt --force
   fi
 }
 
