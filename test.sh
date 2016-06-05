@@ -51,8 +51,9 @@ execute_unit_tests() {
     return 0
   else
     echo "running unit tests on $1"
+    base=/root/src/github.com/ttrahan/micro-mono
+    cd $base/$language/$1
     pwd
-    cd ./$language/$1
     grunt
   fi
 }
@@ -62,11 +63,12 @@ execute_code_coverage() {
     return 0
   else
     echo "running code coverage on $1"
+    base=/root/src/github.com/ttrahan/micro-mono
+    cd $base/$language/$1
     pwd
-    cd ./$language/$1
     ./node_modules/.bin/istanbul cover grunt --gruntfile ./$language/$1 -u tdd
     ./node_modules/.bin/istanbul report cobertura --root ./$language/$1 --dir  ./shippable/codecoverage/
-    cd ../..
+    cd $base
   fi
 }
 
