@@ -4,6 +4,7 @@ detect_changed_languages() {
   echo "detecting changes for this build"
   languages=`git diff --name-only $SHIPPABLE_COMMIT_RANGE | sort -u | awk 'BEGIN {FS="/"} {print $1}' | uniq`
 
+  changed_components=[]
   echo $SHIPPABLE_COMMIT_RANGE
   echo $languages
 
@@ -11,6 +12,7 @@ detect_changed_languages() {
   do
     detect_changed_folders $language
   done
+  echo $changed_components
 }
 
 detect_changed_folders() {
@@ -32,10 +34,10 @@ detect_changed_folders() {
 
   if [ "$push_all_images" == true ]; then
     cd $1
-    export changed_components=`ls -d */ | sed 's/.$//'`
+    export changed_components+=`ls -d */ | sed 's/.$//'`
     cd ..
   else
-    export changed_components=$folders
+    export changed_components+=$folders
   fi
 }
 
