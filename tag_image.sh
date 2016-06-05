@@ -45,8 +45,8 @@ tag_and_push_image() {
   if [[ -z "$1" ]]; then
     return 0
   else
-    echo "tagging image $1"
-    sudo docker tag -f $IMAGE_NAME:$BRANCH.$SHIPPABLE_BUILD_NUMBER $IMAGE_NAME:$1.$BRANCH.$SHIPPABLE_BUILD_NUMBER
+    echo "building image $1"
+    sudo docker build -t $IMAGE_NAME:$1.$BRANCH.$SHIPPABLE_BUILD_NUMBER
     echo "pushing image $1"
     sudo docker push $IMAGE_NAME:$1.$BRANCH.$SHIPPABLE_BUILD_NUMBER
   fi
