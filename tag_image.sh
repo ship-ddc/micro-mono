@@ -61,6 +61,7 @@ tag_and_push_image() {
 
 if [ "$IS_PULL_REQUEST" != true ]; then
   detect_changed_languages
+  echo $changed_components
   tag_and_push_changed_components
 else
   echo "skipping because it's a PR"
