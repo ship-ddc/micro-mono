@@ -58,7 +58,7 @@ execute_code_coverage() {
     return 0
   else
     echo "running code code coverage on $1"
-    ./node_modules/.bin/istanbul cover grunt --gruntfile ./$language/$1 -u tdd
-    ./node_modules/.bin/istanbul report cobertura --root ./$language/$1 --dir  ./shippable/codecoverage/
+    ./$language/$1/node_modules/.bin/istanbul cover grunt --gruntfile ./$language/$1 -u tdd
+    ./$language/$1/node_modules/.bin/istanbul report cobertura --root ./$language/$1 --dir  ./shippable/codecoverage/
   fi
 }
