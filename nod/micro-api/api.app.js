@@ -5,6 +5,8 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var winston = require('winston');
+var logging = require('../_global/logging.js');
+
 
 var routes = require('./routes/routes');
 var app = express();
