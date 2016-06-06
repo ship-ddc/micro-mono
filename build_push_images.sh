@@ -1,5 +1,5 @@
 #!/bin/bash -e
-export IMAGE_NAME=shippabledocker/micro-mono
+export IMAGE_NAME=shippabledocker/micro-mono-repo
 
 detect_changed_languages() {
   echo "detecting changes for this build"
