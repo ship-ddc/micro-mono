@@ -7,7 +7,7 @@ node_js:
 
 env:
   global:
-    - XUNIT_FILE=shippable/testresults/result.xml API_PORT=80
+    - XUNIT_FILE=$SHIPPABLE_BUILD_DIR/shippable/testresults/result.xml API_PORT=80
 
 build:
   pre_ci:
