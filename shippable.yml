@@ -12,8 +12,8 @@ env:
 build:
   pre_ci:
     - node --version
-    - mkdir -p shippable/testresults
-    - mkdir -p shippable/codecoverage
+    - mkdir -p $SHIPPABLE_BUILD_DIR/shippable/testresults
+    - mkdir -p $SHIPPABLE_BUILD_DIR/shippable/codecoverage
 
   pre_ci_boot:
     image_name: drydock/u14nod
@@ -22,7 +22,8 @@ build:
     options: '--privileged=true'
 
   ci:
-    - mkdir -p shippable/testresults && mkdir -p shippable/codecoverage
+    - mkdir -p $SHIPPABLE_BUILD_DIR/shippable/testresults
+    - mkdir -p $SHIPPABLE_BUILD_DIR/shippable/codecoverage
     - ./install.sh
     - ./test.sh
     - ./build_push_images.sh
