@@ -40,6 +40,7 @@ run_tests() {
   for component in $changed_components
   do
     if [ "$component" != '_global' ] && [ "$component" != 'node_modules' ]; then
+      echo pwd
       if [ -f ./$component/Gruntfile.js ]; then
         execute_unit_tests $component
         execute_code_coverage $component
