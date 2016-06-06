@@ -40,7 +40,6 @@ run_tests() {
   for component in $changed_components
   do
     if [ "$component" != '_global' ] && [ "$component" != 'node_modules' ]; then
-      pwd
       if [ -f ./$language/$component/Gruntfile.js ]; then
         execute_unit_tests $component
         execute_code_coverage $component
@@ -54,8 +53,7 @@ execute_unit_tests() {
     return 0
   else
     echo "running unit tests on $1"
-    base=/root/src/github.com/ttrahan/micro-mono
-    cd $base/$language/$1
+    cd $SHIPPABLE_BUILD_DIR/$language/$1
     grunt --force
   fi
 }
@@ -66,7 +64,7 @@ execute_code_coverage() {
   else
     echo "running code coverage on $1"
     base=/root/src/github.com/ttrahan/micro-mono
-    cd $base/$language/$1
+    cd $SHIPPABLE_BUILD_DIR/$language/$1
     ./node_modules/.bin/istanbul cover grunt --force --dir $SHIPPABLE_BUILD_DIR/shippable/codecoverage
     ./node_modules/.bin/istanbul report cobertura --dir  $SHIPPABLE_BUILD_DIR/shippable/codecoverage/
     cd $base
