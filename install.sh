@@ -8,9 +8,11 @@ detect_changed_languages() {
 
   for language in $languages
   do
-    unset changed_components
-    detect_changed_folders $language
-    run_install
+    if [ "$language" != 'shippable' ]; then
+      unset changed_components
+      detect_changed_folders $language
+      run_install
+    fi
   done
 }
 
