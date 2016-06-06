@@ -1,5 +1,6 @@
 #!/bin/bash -e
-export IMAGE_NAME=ttrahan/micro-mono
+export IMAGE_NAME=shippabledocker/micro-mono
+
 detect_changed_languages() {
   echo "detecting changes for this build"
   languages=`git diff --name-only $SHIPPABLE_COMMIT_RANGE | sort -u | awk 'BEGIN {FS="/"} {print $1}' | uniq`
