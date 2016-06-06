@@ -67,8 +67,8 @@ execute_code_coverage() {
     cd $SHIPPABLE_BUILD_DIR/$language/$1
     ./node_modules/.bin/istanbul cover grunt --force --dir $SHIPPABLE_BUILD_DIR/shippable/codecoverage
     ./node_modules/.bin/istanbul report cobertura --dir  $SHIPPABLE_BUILD_DIR/shippable/codecoverage/
-    cd $base
-  fi
+    cd $SHIPPABLE_BUILD_DIR
+    fi
 }
 
 if [ "$IS_PULL_REQUEST" != true ]; then
