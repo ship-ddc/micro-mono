@@ -1,4 +1,4 @@
-FROM drydock/u14nod:prod
+FROM shippabledocker/micro-mono-repo:_global.master.latest
 
 # this folder must be created in the base images
 ADD . /root/micro-www/

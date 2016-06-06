@@ -1,4 +1,4 @@
-FROM drydock/u14nod:prod
+FROM shippabledocker/micro-mono-repo:_global.master.latest
 
 # FROM mhart/alpine-node:0.10
 #

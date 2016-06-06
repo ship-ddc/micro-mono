@@ -38,7 +38,7 @@ detect_changed_folders() {
 tag_and_push_changed_components() {
   for component in $changed_components
   do
-    if [ "$component" != '_global' ] && [ "$component" != 'node_modules' ]; then
+    if [ "$component" != 'node_modules' ]; then
       tag_and_push_image $component
     fi
   done
@@ -47,6 +47,11 @@ tag_and_push_changed_components() {
 tag_and_push_image() {
   if [[ -z "$1" ]]; then
     return 0
+  elif [[ $1 == '_global']]; then
+    echo "building image $1"
+    sudo docker build -t $IMAGE_NAME:$1.$BRANCH.latest ./$language/$1
+    echo "pushing image $1"
+    sudo docker push $IMAGE_NAME:$1.$BRANCH.latest
   else
     echo "building image $1"
     sudo docker build -t $IMAGE_NAME:$1.$BRANCH.$SHIPPABLE_BUILD_NUMBER ./$language/$1
