@@ -30,7 +30,7 @@ build:
 
 integrations:
   hub:
-    - integrationName: "Docker Hub"
+    - integrationName: "shippabledocker"
       type: docker
       branches:
         only:
