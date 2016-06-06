@@ -40,8 +40,10 @@ run_tests() {
   for component in $changed_components
   do
     if [ "$component" != '_global' ] && [ "$component" != 'node_modules' ]; then
-      execute_unit_tests $component
-      execute_code_coverage $component
+      if [ -f ./Gruntfile.js ]; then
+        execute_unit_tests $component
+        execute_code_coverage $component
+      fi
     fi
   done
 }
@@ -64,11 +66,9 @@ execute_code_coverage() {
     echo "running code coverage on $1"
     base=/root/src/github.com/ttrahan/micro-mono
     cd $base/$language/$1
-    if [ -f ./Gruntfile.js ]; then
-      ./node_modules/.bin/istanbul cover grunt --force --dir $SHIPPABLE_BUILD_DIR/shippable/codecoverage
-      ./node_modules/.bin/istanbul report cobertura --dir  $SHIPPABLE_BUILD_DIR/shippable/codecoverage/
-      cd $base
-    fi
+    ./node_modules/.bin/istanbul cover grunt --force --dir $SHIPPABLE_BUILD_DIR/shippable/codecoverage
+    ./node_modules/.bin/istanbul report cobertura --dir  $SHIPPABLE_BUILD_DIR/shippable/codecoverage/
+    cd $base
   fi
 }
 
