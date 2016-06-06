@@ -47,7 +47,7 @@ tag_and_push_changed_components() {
 tag_and_push_image() {
   if [[ -z "$1" ]]; then
     return 0
-  elif [[ $1 == '_global']]; then
+  elif [[ $1 == '_global' ]]; then
     echo "building image $1"
     sudo docker build -t $IMAGE_NAME:$1.$BRANCH.latest ./$language/$1
     echo "pushing image $1"
