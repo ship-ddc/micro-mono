@@ -17,17 +17,17 @@ detect_changed_languages() {
 detect_changed_folders() {
   folders=`git diff --name-only $SHIPPABLE_COMMIT_RANGE | sort -u | grep $1 | awk 'BEGIN {FS="/"} {print $2}' | uniq`
 
-  push_all_images=false
+  process_all_components=false
   for folder in $folders
   do
     if [ "$folder" == '_global' ]; then
       echo "pushing all images"
-      push_all_images=true
+      process_all_components=true
       break
     fi
   done
 
-  if [ "$push_all_images" == true ]; then
+  if [ "$process_all_components" == true ]; then
     cd $1
     export changed_components+=`ls -d */ | sed 's/.$//'`
     cd ..

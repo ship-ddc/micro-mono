@@ -11,6 +11,7 @@ FROM drydock/u14nod:prod
 
 # this folder must be created in the base images
 ADD . /root/micro-api/
+ADD ../_global /root/_global
 
 #now run set up
 RUN /bin/bash /root/micro-api/setup.sh
